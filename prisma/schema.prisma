@@ -48,4 +48,30 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Quiz          Quiz[]
+}
+
+model Quiz {
+  id          String     @id @default(cuid())
+  userId      String
+  timeStarted DateTime
+  topic       String
+  timeEnded   DateTime?
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questions   Question[]
+
+  @@index([userId], name: "userId")
+}
+
+model Question {
+  id         String   @id @default(cuid())
+  question   String
+  answer     String
+  quizId     String
+  options    Json
+  isCorrect  Boolean?
+  userAnswer String?
+  quiz       Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId], name: "quizId")
 }
