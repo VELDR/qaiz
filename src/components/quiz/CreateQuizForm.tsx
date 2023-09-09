@@ -6,9 +6,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from './ui/card';
+} from '../ui/card';
 import { useForm } from 'react-hook-form';
-import { createQuizValidator } from '@/validator/form/quiz';
+import { createQuizValidator } from '@/validator/quiz';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
@@ -20,16 +20,20 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import LoadingQuiz from './LoadingQuiz';
 
 type Props = {};
 
 type Input = z.infer<typeof createQuizValidator>;
 
 const CreateQuizForm = (props: Props) => {
+  const [isGeneratingQuiz, setIsGeneratingQuiz] = useState(false);
+  const [finishedLoading, setFinishedLoading] = useState(false);
   const router = useRouter();
 
   const { mutate: getQuestions, isLoading } = useMutation({
@@ -51,17 +55,26 @@ const CreateQuizForm = (props: Props) => {
   });
 
   const onSubmit = (input: Input) => {
+    setIsGeneratingQuiz(true);
     getQuestions(
       { amount: input.amount, topic: input.topic },
       {
         onSuccess: ({ quizId }) => {
-          router.push(`/quiz/${quizId}`);
+          setTimeout(() => {
+            setFinishedLoading(true);
+            router.push(`/quiz/${quizId}`);
+          }, 1000);
         },
+        onError: () => setIsGeneratingQuiz(false),
       }
     );
   };
 
   form.watch();
+
+  if (isGeneratingQuiz) {
+    return <LoadingQuiz finishedLoading={finishedLoading} />;
+  }
 
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

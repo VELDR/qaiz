@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/db';
-import { answerValidator } from '@/validator/form/quiz';
+import { answerValidator } from '@/validator/quiz';
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 

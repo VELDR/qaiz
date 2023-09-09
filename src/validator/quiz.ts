@@ -15,3 +15,7 @@ export const answerValidator = z.object({
   questionId: z.string(),
   userAnswer: z.string(),
 });
+
+export const endQuizValidator = z.object({
+  quizId: z.string(),
+});
