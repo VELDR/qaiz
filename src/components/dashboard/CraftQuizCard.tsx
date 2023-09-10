@@ -4,9 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Brain, Hammer } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-type Props = {};
-
-const CraftQuizCard = (props: Props) => {
+const CraftQuizCard = () => {
   const router = useRouter();
 
   return (

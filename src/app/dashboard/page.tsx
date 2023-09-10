@@ -1,11 +1,13 @@
+import CommunityInterestCard from '@/components/dashboard/CommunityInterestCard';
 import CraftQuizCard from '@/components/dashboard/CraftQuizCard';
+import HistoryCard from '@/components/dashboard/HistoryCard';
+import RecentActivityCard from '@/components/dashboard/RecentActivityCard';
 import { getAuthSession } from '@/lib/nextauth';
 import { LayoutDashboard } from 'lucide-react';
+import { Metadata, ResolvingMetadata } from 'next';
 import { redirect } from 'next/navigation';
 
-type Props = {};
-
-const Dashboard = async (props: Props) => {
+const Dashboard = async () => {
   const session = await getAuthSession();
 
   if (!session?.user) {
@@ -18,8 +20,11 @@ const Dashboard = async (props: Props) => {
       </h1>
       <div className="grid gap-4 mt-4 md:grid-cols-2">
         <CraftQuizCard />
-        <CraftQuizCard />
-        <CraftQuizCard />
+        <HistoryCard />
+      </div>
+      <div className="grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-7">
+        <CommunityInterestCard />
+        <RecentActivityCard />
       </div>
     </main>
   );

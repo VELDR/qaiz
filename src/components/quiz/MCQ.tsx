@@ -165,10 +165,10 @@ const MCQ = ({ quiz }: Props) => {
   const letters = ['A', 'B', 'C', 'D'];
 
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 md:w-auto">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 md:w-1/2">
       <div className="flex flex-row justify-between">
         <div className="flex flex-col">
-          <p className="whitespace-nowrap px-2 py-1 text-white rounded-lg bg-slate-800 mb-2">
+          <p className="px-2 py-1 text-white rounded-lg bg-slate-800 mb-2 w-fit">
             {quiz.topic}
           </p>
 
@@ -187,7 +187,7 @@ const MCQ = ({ quiz }: Props) => {
       </div>
       <Card className="w-full mt-4">
         <CardHeader>
-          <CardTitle className="flex items-center mr-5 text-center">
+          <CardTitle className="flex items-center mr-5 ">
             <div className="border-4 border-slate-800 dark:border-slate-200 rounded-md px-2 py-1 text-3xl diagonal-fractions mr-2">
               <span>{questionIndex + 1}</span>
               <span className="text-slate-400">/</span>
@@ -240,16 +240,15 @@ const MCQ = ({ quiz }: Props) => {
         })}
         {isChecking && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
       </div>
-      <div className="flex justify-between">
-        {questionIndex > 0 && (
-          <Button
-            disabled={isChecking}
-            onClick={() => handleBack()}
-            className="pl-1"
-          >
-            <ChevronLeft /> Back
-          </Button>
-        )}
+      <div className="flex justify-between items-center">
+        <Button
+          disabled={isChecking}
+          onClick={() => handleBack()}
+          className={`pl-1 ${questionIndex === 0 ? 'invisible' : ''}`}
+        >
+          <ChevronLeft /> Back
+        </Button>
+
         <Button
           disabled={isChecking || submitted[questionIndex]}
           onClick={() => handleSubmit()}
@@ -257,15 +256,16 @@ const MCQ = ({ quiz }: Props) => {
         >
           Submit
         </Button>
-        {questionIndex < quiz.questions.length - 1 && (
-          <Button
-            disabled={isChecking}
-            onClick={() => handleNext()}
-            className="pr-1"
-          >
-            Next <ChevronRight />
-          </Button>
-        )}
+
+        <Button
+          disabled={isChecking}
+          onClick={() => handleNext()}
+          className={`pr-1 ${
+            questionIndex === quiz.questions.length - 1 ? 'invisible' : ''
+          }`}
+        >
+          Next <ChevronRight />
+        </Button>
       </div>
     </div>
   );

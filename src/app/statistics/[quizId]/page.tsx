@@ -2,9 +2,11 @@ import ResultsCard from '@/components/statistics/ResultsCard';
 import QuizCompletionTimeCard from '@/components/statistics/QuizCompletionTimeCard';
 import { prisma } from '@/lib/db';
 import { getAuthSession } from '@/lib/nextauth';
-import { BarChart } from 'lucide-react';
+import { BarChart, LayoutDashboard } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import QuestionsList from '@/components/statistics/QuestionList';
+import { buttonVariants } from '@/components/ui/button';
+import Link from 'next/link';
 
 type Props = {
   params: {
@@ -40,6 +42,10 @@ const StatisticsPage = async ({ params: { quizId } }: Props) => {
         <h1 className="text-3xl font-bold flex items-center">
           <BarChart size={30} strokeWidth={3.2} className="mr-1" /> Statistics
         </h1>
+        <Link className={buttonVariants()} href="/dashboard">
+          <LayoutDashboard className="mr-2" />
+          Dashboard
+        </Link>
       </div>
       <div className="grid gap-4 my-4 md:grid-cols-3">
         <ResultsCard

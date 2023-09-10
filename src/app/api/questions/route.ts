@@ -17,7 +17,7 @@ export const POST = async (req: Request, res: Response) => {
     const { amount, topic } = createQuizValidator.parse(body);
 
     let questions = await strict_output(
-      'You are a helpful AI that is able to generate mcq questions and answers, the length of each answer should not exceed 15 words',
+      'Generate multiple-choice questions (MCQs) with concise answers (under 15 words each) at a moderate difficulty level.',
       new Array(amount).fill(
         `You are to generate a random multiple choice question about ${topic}`
       ),

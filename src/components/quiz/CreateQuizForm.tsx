@@ -27,11 +27,13 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LoadingQuiz from './LoadingQuiz';
 
-type Props = {};
+type Props = {
+  topicParam: string;
+};
 
 type Input = z.infer<typeof createQuizValidator>;
 
-const CreateQuizForm = (props: Props) => {
+const CreateQuizForm = ({ topicParam }: Props) => {
   const [isGeneratingQuiz, setIsGeneratingQuiz] = useState(false);
   const [finishedLoading, setFinishedLoading] = useState(false);
   const router = useRouter();
@@ -49,8 +51,8 @@ const CreateQuizForm = (props: Props) => {
   const form = useForm<Input>({
     resolver: zodResolver(createQuizValidator),
     defaultValues: {
+      topic: topicParam,
       amount: 5,
-      topic: '',
     },
   });
 
