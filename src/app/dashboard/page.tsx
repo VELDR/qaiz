@@ -7,6 +7,15 @@ import { LayoutDashboard } from 'lucide-react';
 import { Metadata, ResolvingMetadata } from 'next';
 import { redirect } from 'next/navigation';
 
+export async function generateMetadata(
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const session = await getAuthSession();
+  return {
+    title: `${session?.user.name}'s Dashboard - Qaiz`,
+  };
+}
+
 const Dashboard = async () => {
   const session = await getAuthSession();
 

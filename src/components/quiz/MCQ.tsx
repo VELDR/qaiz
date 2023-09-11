@@ -238,7 +238,6 @@ const MCQ = ({ quiz }: Props) => {
             </Button>
           );
         })}
-        {isChecking && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
       </div>
       <div className="flex justify-between items-center">
         <Button
@@ -254,6 +253,7 @@ const MCQ = ({ quiz }: Props) => {
           onClick={() => handleSubmit()}
           className="bg-[green]"
         >
+          {isChecking && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
           Submit
         </Button>
 

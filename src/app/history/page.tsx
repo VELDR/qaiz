@@ -3,12 +3,20 @@ import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getAuthSession } from '@/lib/nextauth';
 import { LayoutDashboard } from 'lucide-react';
+import { Metadata, ResolvingMetadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-type Props = {};
+export async function generateMetadata(
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const session = await getAuthSession();
+  return {
+    title: `${session?.user.name}'s History - Qaiz`,
+  };
+}
 
-const HistoryPage = async (props: Props) => {
+const HistoryPage = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
     return redirect('/');

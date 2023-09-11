@@ -1,4 +1,7 @@
-import LoginButton from '@/components/LoginButton';
+import FeaturesSection from '@/components/landing-page/FeaturesSection';
+import Footer from '@/components/landing-page/Footer';
+import HeroBanner from '@/components/landing-page/HeroBanner';
+import TechnologiesSection from '@/components/landing-page/TechnologiesSection';
 import { getAuthSession } from '@/lib/nextauth';
 import { redirect } from 'next/navigation';
 
@@ -11,8 +14,10 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Landing page</h1>
-      <LoginButton text="Login with Google" />
+      <HeroBanner />
+      <FeaturesSection />
+      <TechnologiesSection />
+      <Footer />
     </div>
   );
 }

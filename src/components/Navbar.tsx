@@ -4,9 +4,8 @@ import LoginButton from './LoginButton';
 import UserAccountNav from './UserAccountNav';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
-type Props = {};
 
-const Navbar = async (props: Props) => {
+const Navbar = async () => {
   const session = await getAuthSession();
 
   return (
@@ -18,7 +17,7 @@ const Navbar = async (props: Props) => {
           {session?.user ? (
             <UserAccountNav user={session.user} />
           ) : (
-            <LoginButton text="Login" />
+            <LoginButton text="Login" showArrow={false} />
           )}
         </div>
       </div>

@@ -55,7 +55,7 @@ const QuizHistory = async ({ limit, userId }: Props) => {
                     : 'text-red-500'
                 }`}
               >
-                {score}
+                {Math.floor(score)}
               </p>
 
               <div className="ml-4 space-y-1">

@@ -4,9 +4,10 @@ import { prisma } from '@/lib/db';
 import { getAuthSession } from '@/lib/nextauth';
 import { BarChart, LayoutDashboard } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import QuestionsList from '@/components/statistics/QuestionList';
+import QuizReview from '@/components/statistics/QuizReview';
 import { buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
+import { Metadata, ResolvingMetadata } from 'next';
 
 type Props = {
   params: {
@@ -14,15 +15,29 @@ type Props = {
   };
 };
 
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const quiz = await fetchQuiz(params.quizId);
+  return {
+    title: `${quiz?.topic} Statistics - Qaiz`,
+  };
+}
+
+const fetchQuiz = async (quizId: string) => {
+  return await prisma.quiz.findUnique({
+    where: { id: quizId },
+    include: { questions: true },
+  });
+};
+
 const StatisticsPage = async ({ params: { quizId } }: Props) => {
   const session = await getAuthSession();
   if (!session?.user) {
     return redirect('/');
   }
-  const quiz = await prisma.quiz.findUnique({
-    where: { id: quizId },
-    include: { questions: true },
-  });
+  const quiz = await fetchQuiz(quizId);
   if (!quiz) {
     return redirect('/quiz');
   }
@@ -60,7 +75,7 @@ const StatisticsPage = async ({ params: { quizId } }: Props) => {
         />
       </div>
 
-      <QuestionsList questions={quiz.questions} />
+      <QuizReview questions={quiz.questions} />
     </main>
   );
 };

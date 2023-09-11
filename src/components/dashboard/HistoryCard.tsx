@@ -4,9 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 
-type Props = {};
-
-const HistoryCard = (props: Props) => {
+const HistoryCard = () => {
   const router = useRouter();
   return (
     <Card>

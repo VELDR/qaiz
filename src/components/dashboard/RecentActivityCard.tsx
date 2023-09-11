@@ -27,9 +27,7 @@ const RecentActivityCard = async () => {
   return (
     <Card className="col-span-4 lg:col-span-3">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">
-          <Link href="/history">Recent Activity</Link>
-        </CardTitle>
+        <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
         <CardDescription>
           You have played a total of{' '}
           <span className="font-bold">{quizCount}</span>{' '}

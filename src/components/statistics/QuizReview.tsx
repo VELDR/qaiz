@@ -24,7 +24,7 @@ type Props = {
   questions: Question[];
 };
 
-const QuestionsList = ({ questions }: Props) => {
+const QuizReview = ({ questions }: Props) => {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -108,4 +108,4 @@ const QuestionsList = ({ questions }: Props) => {
   );
 };
 
-export default QuestionsList;
+export default QuizReview;
