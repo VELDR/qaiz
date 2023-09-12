@@ -1,12 +1,10 @@
-'use client';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import { Brain, Hammer } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const CraftQuizCard = () => {
-  const router = useRouter();
-
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
@@ -20,9 +18,12 @@ const CraftQuizCard = () => {
           quiz! 📚🧠
         </p>
       </CardContent>
-      <Button className="ml-6 mb-6" onClick={() => router.push('/quiz')}>
+      <Link
+        href={'/quiz'}
+        className={cn(buttonVariants({ size: 'default' }), 'ml-6 mb-6')}
+      >
         <Hammer size={18} className="mr-1" /> Start Crafting
-      </Button>
+      </Link>
     </Card>
   );
 };

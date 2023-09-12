@@ -6,7 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card';
-import CustomWordCloud from './CustomWordCloud';
+import dynamic from 'next/dynamic';
+
+const CustomWordCloud = dynamic(
+  () => {
+    return import('./CustomWordCloud');
+  },
+  { ssr: false }
+);
 
 const CommunityInterestCard = async () => {
   const topics = await prisma.topicCount.findMany({});

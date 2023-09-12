@@ -1,20 +1,22 @@
 'use client';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 import WordCloud from 'react-d3-cloud';
 
 type Props = {
   topicWordClouds: { text: string; value: number }[];
 };
 
-const fontSizeMapper = (word: { value: number }) =>
-  Math.log2(word.value) * 5 + 25;
-
-const rotate = (word: { value: number }) => word.value % 360;
-
 const CustomWordCloud = ({ topicWordClouds }: Props) => {
   const theme = useTheme();
   const router = useRouter();
+  const fontSizeMapper = useCallback(
+    (word: { value: number }) => Math.log2(word.value) * 5 + 25,
+    []
+  );
+  const rotate = useCallback((word: { value: number }) => word.value % 360, []);
+
   return (
     <>
       <WordCloud

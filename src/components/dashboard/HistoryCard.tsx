@@ -1,11 +1,10 @@
-'use client';
 import { History } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { useRouter } from 'next/navigation';
-import { Button } from '../ui/button';
+import { buttonVariants } from '../ui/button';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const HistoryCard = () => {
-  const router = useRouter();
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
@@ -17,9 +16,12 @@ const HistoryCard = () => {
           Go back in time to review 📜 your quiz achievements and challenges!
         </p>
       </CardContent>
-      <Button className="ml-6 mb-6" onClick={() => router.push('/history')}>
+      <Link
+        href={'/history'}
+        className={cn(buttonVariants({ size: 'default' }), 'ml-6 mb-6')}
+      >
         View History
-      </Button>
+      </Link>
     </Card>
   );
 };

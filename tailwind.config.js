@@ -70,6 +70,13 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      dropShadow: {
+        glow: [
+          '-0.2rem -0.2rem 1rem rgba(183, 45, 176, 0.5)',
+          '0.2rem 0.2rem 1rem rgba(183, 45, 176, 0.5)',
+          '0 0 2rem rgba(183, 45, 176, 0.5)',
+        ],
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
