@@ -16,13 +16,6 @@ export const POST = async (req: Request, res: Response) => {
     }
     const body = await req.json();
     const { topic, amount } = createQuizValidator.parse(body);
-    const quiz = await prisma.quiz.create({
-      data: {
-        userId: session.user.id,
-        timeStarted: new Date(),
-        topic,
-      },
-    });
     //creates or update topicCount
     await prisma.topicCount.upsert({
       where: { topic },
@@ -40,6 +33,21 @@ export const POST = async (req: Request, res: Response) => {
       topic,
       amount,
     });
+
+    if (!data.questions || data.questions.length === 0) {
+      return NextResponse.json({
+        error: 'Failed to retrieve questions. Please try again later.',
+      });
+    }
+
+    const quiz = await prisma.quiz.create({
+      data: {
+        userId: session.user.id,
+        timeStarted: new Date(),
+        topic,
+      },
+    });
+
     type mcqQuestion = {
       question: string;
       answer: string;
