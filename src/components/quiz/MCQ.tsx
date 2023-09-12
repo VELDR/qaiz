@@ -165,8 +165,8 @@ const MCQ = ({ quiz }: Props) => {
   const letters = ['A', 'B', 'C', 'D'];
 
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 md:w-1/2">
-      <div className="flex flex-row justify-between">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-1/2">
+      <div className="flex flex-col space-y-2 md:flex-row md:justify-between">
         <div className="flex flex-col">
           <p className="px-2 py-1 text-white rounded-lg bg-slate-800 mb-2 w-fit">
             {quiz.topic}
