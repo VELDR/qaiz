@@ -26,6 +26,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LoadingQuiz from './LoadingQuiz';
+import { useToast } from '../ui/use-toast';
 
 type Props = {
   topicParam: string;
@@ -38,12 +39,9 @@ const CreateQuizForm = ({ topicParam }: Props) => {
   const [finishedLoading, setFinishedLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
+  const { toast } = useToast();
 
-  const {
-    mutate: getQuestions,
-    isLoading,
-    isError,
-  } = useMutation({
+  const { mutate: getQuestions, isLoading } = useMutation({
     mutationFn: async ({ amount, topic }: Input) => {
       const response = await axios.post('/api/quiz', {
         amount,
@@ -74,7 +72,12 @@ const CreateQuizForm = ({ topicParam }: Props) => {
         },
         onError: () => {
           setIsGeneratingQuiz(false);
-          setErrorMessage('Failed creating quiz');
+          toast({
+            title: 'Failed Creating Quiz 😔',
+            variant: 'destructive',
+            description:
+              "Don't be alarmed, our AI is just having a chat with Siri. They're discussing world domination strategies. Try again later",
+          });
         },
       }
     );
@@ -145,11 +148,6 @@ const CreateQuizForm = ({ topicParam }: Props) => {
               <Button disabled={isLoading} type="submit">
                 Create
               </Button>
-              {isError && (
-                <p className="text-center text-sm text-red-500">
-                  {errorMessage}
-                </p>
-              )}
             </form>
           </Form>
         </CardContent>

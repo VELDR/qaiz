@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Providers from '@/components/Providers';
 import NextNProgressClient from '@/components/NextNProgressClient';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Navbar />
           <NextNProgressClient />
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>
