@@ -52,7 +52,7 @@ const CreateQuizForm = ({ topicParam }: Props) => {
     resolver: zodResolver(createQuizValidator),
     defaultValues: {
       topic: topicParam,
-      amount: 5,
+      amount: 3,
     },
   });
 
