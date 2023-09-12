@@ -1,8 +1,6 @@
 import { prisma } from '@/lib/db';
 import { getAuthSession } from '@/lib/nextauth';
-import { Question, Quiz } from '@prisma/client';
 import { redirect } from 'next/navigation';
-import React from 'react';
 import {
   Card,
   CardContent,
@@ -10,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card';
-import Link from 'next/link';
 import QuizHistory from './QuizHistory';
 
 const RecentActivityCard = async () => {

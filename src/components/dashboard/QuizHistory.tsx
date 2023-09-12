@@ -1,15 +1,8 @@
-import {
-  CalendarDays,
-  Clock,
-  FileQuestion,
-  HelpCircle,
-  Newspaper,
-  Timer,
-} from 'lucide-react';
-import { formatTime } from '@/lib/utils';
-import { differenceInSeconds } from 'date-fns';
 import { prisma } from '@/lib/db';
+import { formatTime } from '@/lib/utils';
 import { Question, Quiz } from '@prisma/client';
+import { differenceInSeconds } from 'date-fns';
+import { CalendarDays, HelpCircle, Timer } from 'lucide-react';
 import Link from 'next/link';
 
 type Props = {
@@ -25,7 +18,7 @@ const QuizHistory = async ({ limit, userId }: Props) => {
   const quizzes = await prisma.quiz.findMany({
     where: { userId },
     include: { questions: true },
-    take: 10,
+    take: limit,
     orderBy: { timeStarted: 'desc' },
   });
 

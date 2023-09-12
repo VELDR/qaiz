@@ -1,8 +1,8 @@
-import { History } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { buttonVariants } from '../ui/button';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { History } from 'lucide-react';
+import Link from 'next/link';
+import { buttonVariants } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 const HistoryCard = () => {
   return (

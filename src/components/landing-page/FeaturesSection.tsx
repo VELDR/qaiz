@@ -1,4 +1,3 @@
-import React from 'react';
 import FeatureCard from './FeatureCard';
 import { Archive, BarChart, BrainCog, Flame, Timer } from 'lucide-react';
 
