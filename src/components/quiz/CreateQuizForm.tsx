@@ -36,9 +36,14 @@ type Input = z.infer<typeof createQuizValidator>;
 const CreateQuizForm = ({ topicParam }: Props) => {
   const [isGeneratingQuiz, setIsGeneratingQuiz] = useState(false);
   const [finishedLoading, setFinishedLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
-  const { mutate: getQuestions, isLoading } = useMutation({
+  const {
+    mutate: getQuestions,
+    isLoading,
+    isError,
+  } = useMutation({
     mutationFn: async ({ amount, topic }: Input) => {
       const response = await axios.post('/api/quiz', {
         amount,
@@ -67,7 +72,10 @@ const CreateQuizForm = ({ topicParam }: Props) => {
             router.push(`/quiz/${quizId}`);
           }, 1000);
         },
-        onError: () => setIsGeneratingQuiz(false),
+        onError: () => {
+          setIsGeneratingQuiz(false);
+          setErrorMessage('Failed creating quiz');
+        },
       }
     );
   };
@@ -137,6 +145,11 @@ const CreateQuizForm = ({ topicParam }: Props) => {
               <Button disabled={isLoading} type="submit">
                 Create
               </Button>
+              {isError && (
+                <p className="text-center text-sm text-red-500">
+                  {errorMessage}
+                </p>
+              )}
             </form>
           </Form>
         </CardContent>
