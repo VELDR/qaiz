@@ -119,11 +119,17 @@ const CreateQuizForm = ({ topicParam }: Props) => {
                         placeholder="Enter a number from 1 to 20..."
                         {...field}
                         type="number"
+                        max={3}
+                        min={1}
                         onChange={(e) =>
                           form.setValue('amount', parseInt(e.target.value))
                         }
                       />
                     </FormControl>
+                    <FormDescription>
+                      Note: Currently, the max number of questions are 3 due to
+                      limitations of Vercel&apos;s Hobby plan
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
