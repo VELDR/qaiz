@@ -35,9 +35,12 @@ export const POST = async (req: Request, res: Response) => {
     });
 
     if (!data.questions || data.questions.length === 0) {
-      return NextResponse.json({
-        error: 'Failed to retrieve questions. Please try again later.',
-      });
+      return NextResponse.json(
+        {
+          error: 'Failed to retrieve questions. Please try again.',
+        },
+        { status: 500 }
+      );
     }
 
     const quiz = await prisma.quiz.create({

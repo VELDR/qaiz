@@ -37,11 +37,14 @@ type Input = z.infer<typeof createQuizValidator>;
 const CreateQuizForm = ({ topicParam }: Props) => {
   const [isGeneratingQuiz, setIsGeneratingQuiz] = useState(false);
   const [finishedLoading, setFinishedLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
   const { toast } = useToast();
 
-  const { mutate: getQuestions, isLoading } = useMutation({
+  const {
+    mutate: getQuestions,
+    isLoading,
+    isError,
+  } = useMutation({
     mutationFn: async ({ amount, topic }: Input) => {
       const response = await axios.post('/api/quiz', {
         amount,
@@ -72,12 +75,14 @@ const CreateQuizForm = ({ topicParam }: Props) => {
         },
         onError: () => {
           setIsGeneratingQuiz(false);
-          toast({
-            title: 'Failed Creating Quiz 😔',
-            variant: 'destructive',
-            description:
-              "Don't be alarmed, our AI is just having a chat with Siri. They're discussing world domination strategies. Try again later",
-          });
+          if (isError) {
+            toast({
+              title: 'Failed Creating Quiz 😔',
+              variant: 'destructive',
+              description:
+                "Don't be alarmed, our AI is just having a chat with Siri. They're discussing world domination strategies. Try again later",
+            });
+          }
         },
       }
     );
