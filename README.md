@@ -15,12 +15,19 @@ Qaiz is a self-paced learning platform built with Next.js, powered by OpenAI's A
 ## Technologies Used
 
 - Next.js (with TypeScript)
+
 - NextAuth (Google OAuth)
+
 - Prisma (with MySQL)
+
 - OpenAI API for AI-generated quizzes
+
 - Zod for robust data validation
+
 - Tailwind CSS and Shadcn for styling
+
 - Lucide Icons for icons
+
 - React Query for efficient data fetching and state management
 
 ## Deployment Limitations
