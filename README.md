@@ -1,34 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Qaiz - Self-paced Learning Platform
 
-## Getting Started
+Qaiz is a self-paced learning platform built with Next.js, powered by OpenAI's AI-generated quizzes. It provides an engaging learning experience on any topics the user desires. With intuitive user interface design and robust features, Qaiz simplifies learning and knowledge assessment.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Smart Quizzes:** Qaiz offers AI-generated quizzes tailored to your chosen topics.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Quiz Insights:** Dive into the details of your performance. Review your answers to see which questions you got right and which ones you missed.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Quiz History Tracking:** Keep a record of your past quizzes, track your progress, and measure your improvement over time.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Trending Topics:** Explore trending quiz topics shared across the Qaiz community through an interactive word cloud.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js (with TypeScript)
+- NextAuth (Google OAuth)
+- Prisma (with MySQL)
+- OpenAI API for AI-generated quizzes
+- Zod for robust data validation
+- Tailwind CSS and Shadcn for styling
+- Lucide Icons for icons
+- React Query for efficient data fetching and state management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment Limitations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Please note that the current deployment of Qaiz on Vercel's Hobby plan has certain limitations:
 
-## Deploy on Vercel
+- Quizzes are limited to a maximum of 3 questions due to Vercel's serverless function execution timeout, which is set at 10 seconds.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Occasionally, the platform may experience issues or delays in generating quizzes due to these limitations.
