@@ -1,6 +1,6 @@
 # Qaiz - Self-paced Learning Platform
 
-Qaiz is a self-paced learning platform built with Next.js, powered by OpenAI's AI-generated quizzes. It provides an engaging learning experience on any topics the user desires. With intuitive user interface design and robust features, Qaiz simplifies learning and knowledge assessment.
+[Qaiz](https://qaiz.vercel.app) is a self-paced learning platform built with Next.js, powered by OpenAI's AI-generated quizzes. It provides an engaging learning experience on any topics the user desires. With intuitive user interface design and robust features, Qaiz simplifies learning and knowledge assessment.
 
 ## Features
 
