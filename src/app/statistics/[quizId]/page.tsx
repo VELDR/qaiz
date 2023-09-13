@@ -75,7 +75,7 @@ const StatisticsPage = async ({ params: { quizId } }: Props) => {
         />
       </div>
 
-      <QuizReview questions={quiz.questions} />
+      <QuizReview questions={quiz.questions} topic={quiz.topic} />
     </main>
   );
 };
