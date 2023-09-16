@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
+} from '../ui/dropdown-menu';
 import { LogOut } from 'lucide-react';
 import UserAvatar from './UserAvatar';
 
@@ -31,12 +31,6 @@ const UserAccountNav = ({ user }: Props) => {
             </p>
           )}
         </div>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/">Settings</Link>
-        </DropdownMenuItem>
-
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={(e) => {

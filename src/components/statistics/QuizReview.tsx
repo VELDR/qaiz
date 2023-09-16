@@ -1,24 +1,30 @@
 'use client';
 
-import { Question } from '@prisma/client';
+import { Difficulty, Question } from '@prisma/client';
 import { FileCheck } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import DifficultyLevel from '../DifficultyLevel';
+
 type Props = {
   questions: Question[];
   topic: string;
+  difficulty: Difficulty;
 };
 
-const QuizReview = ({ questions, topic }: Props) => {
+const QuizReview = ({ questions, topic, difficulty }: Props) => {
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-2xl font-bold">
-          Quiz Review 📝 -{' '}
-          <span className="px-2 py-1 text-white rounded-lg bg-slate-800 w-fit">
-            {topic}
-          </span>
-        </CardTitle>
-        <FileCheck />
+      <CardHeader className="flex flex-col ">
+        <div className="flex flex-row items-center justify-between">
+          <CardTitle className="text-2xl font-bold">Quiz Review 📝</CardTitle>
+          <FileCheck />
+        </div>
+
+        <span className="px-2 py-1 text-white rounded-lg bg-slate-800 w-fit">
+          {topic}
+        </span>
+
+        <DifficultyLevel difficulty={difficulty} />
       </CardHeader>
       <CardContent>
         {questions.map(

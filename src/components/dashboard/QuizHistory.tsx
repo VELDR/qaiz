@@ -4,6 +4,7 @@ import { Question, Quiz } from '@prisma/client';
 import { differenceInSeconds } from 'date-fns';
 import { CalendarDays, HelpCircle, Timer } from 'lucide-react';
 import Link from 'next/link';
+import DifficultyLevel from '../DifficultyLevel';
 
 type Props = {
   limit: number;
@@ -52,12 +53,20 @@ const QuizHistory = async ({ limit, userId }: Props) => {
               </p>
 
               <div className="ml-4 space-y-1">
-                <Link
-                  className="text-base font-medium leading-none px-2 py-1 text-white rounded-lg w-fit bg-slate-800 hover:underline hover:opacity-75"
-                  href={`/statistics/${quiz.id}`}
-                >
-                  {quiz.topic}
-                </Link>
+                <div className="flex space-x-2">
+                  <Link
+                    className="text-base font-medium text-center leading-none px-2 py-1 text-white rounded-lg w-fit bg-slate-800 hover:underline hover:opacity-75"
+                    href={`/statistics/${quiz.id}`}
+                  >
+                    {quiz.topic}
+                  </Link>
+                  <DifficultyLevel
+                    difficulty={quiz.difficulty}
+                    textStyle="text-xs"
+                    size={10}
+                    showText={false}
+                  />
+                </div>
                 <p className="flex items-center text-xs text-muted-foreground">
                   <CalendarDays className="w-4 h-4 mr-1" />
                   {new Date(quiz.timeEnded ?? 0).toLocaleDateString()} -{'  '}

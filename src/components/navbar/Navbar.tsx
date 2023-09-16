@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/nextauth';
 
-import LoginButton from './LoginButton';
+import LoginButton from '../LoginButton';
 import UserAccountNav from './UserAccountNav';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';

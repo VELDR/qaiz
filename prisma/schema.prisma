@@ -51,12 +51,19 @@ model User {
   Quiz          Quiz[]
 }
 
+enum Difficulty {
+  beginner
+  intermediate
+  expert
+}
+
 model Quiz {
   id          String     @id @default(cuid())
   userId      String
   timeStarted DateTime
   topic       String
   timeEnded   DateTime?
+  difficulty  Difficulty @default(intermediate)
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   questions   Question[]
 

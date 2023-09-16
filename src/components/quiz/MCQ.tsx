@@ -18,6 +18,7 @@ import { cn, formatTime } from '@/lib/utils';
 import { differenceInSeconds } from 'date-fns';
 import MCQCounter from './MCQCounter';
 import Link from 'next/link';
+import DifficultyLevel from '../DifficultyLevel';
 
 type Props = {
   quiz: Quiz & { questions: Pick<Question, 'id' | 'question' | 'options'>[] };
@@ -168,10 +169,12 @@ const MCQ = ({ quiz }: Props) => {
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-1/2">
       <div className="flex flex-col space-y-2 md:flex-row md:justify-between">
         <div className="flex flex-col">
-          <p className="px-2 py-1 text-white rounded-lg bg-slate-800 mb-2 w-fit">
-            {quiz.topic}
-          </p>
-
+          <div className="flex space-x-2">
+            <p className="px-2 py-1 text-white rounded-lg bg-slate-800 mb-2 w-fit">
+              {quiz.topic}
+            </p>
+            <DifficultyLevel difficulty={quiz.difficulty} />
+          </div>
           <div className="flex self-start text-slate-400">
             <Timer className="mr-1" />
             <span className="mr-2">Time elapsed:</span>

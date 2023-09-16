@@ -15,11 +15,12 @@ export const POST = async (req: Request, res: Response) => {
       );
     }
     const body = await req.json();
-    const { topic, amount } = createQuizValidator.parse(body);
+    const { topic, amount, difficulty } = createQuizValidator.parse(body);
 
     const { data } = await axios.post(`${process.env.API_URL}/api/questions `, {
       topic,
       amount,
+      difficulty,
     });
 
     if (!data.questions || data.questions.length === 0) {
@@ -36,6 +37,7 @@ export const POST = async (req: Request, res: Response) => {
         userId: session.user.id,
         timeStarted: new Date(),
         topic,
+        difficulty,
       },
     });
 

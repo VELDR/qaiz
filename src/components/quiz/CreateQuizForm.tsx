@@ -27,6 +27,15 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LoadingQuiz from './LoadingQuiz';
 import { useToast } from '../ui/use-toast';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import { Hammer } from 'lucide-react';
+import DifficultyLevel from '../DifficultyLevel';
 
 type Props = {
   topicParam: string;
@@ -45,10 +54,11 @@ const CreateQuizForm = ({ topicParam }: Props) => {
     isLoading,
     isError,
   } = useMutation({
-    mutationFn: async ({ amount, topic }: Input) => {
+    mutationFn: async ({ amount, topic, difficulty }: Input) => {
       const response = await axios.post('/api/quiz', {
         amount,
         topic,
+        difficulty,
       });
       return response.data;
     },
@@ -59,13 +69,18 @@ const CreateQuizForm = ({ topicParam }: Props) => {
     defaultValues: {
       topic: topicParam,
       amount: 3,
+      difficulty: 'beginner',
     },
   });
 
   const onSubmit = (input: Input) => {
     setIsGeneratingQuiz(true);
     getQuestions(
-      { amount: input.amount, topic: input.topic },
+      {
+        amount: input.amount,
+        topic: input.topic,
+        difficulty: input.difficulty,
+      },
       {
         onSuccess: ({ quizId }) => {
           setTimeout(() => {
@@ -95,7 +110,7 @@ const CreateQuizForm = ({ topicParam }: Props) => {
   }
 
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 md:w-fit ">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 md:w-fit xl:w-1/3 ">
       <Card>
         <CardHeader>
           <CardTitle className="font-bold text-2xl">Craft Your Quiz</CardTitle>
@@ -129,7 +144,7 @@ const CreateQuizForm = ({ topicParam }: Props) => {
                 name="amount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Number of questions</FormLabel>
+                    <FormLabel>No. of questions</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter a number from 1 to 20..."
@@ -150,8 +165,53 @@ const CreateQuizForm = ({ topicParam }: Props) => {
                   </FormItem>
                 )}
               />
-              <Button disabled={isLoading} type="submit">
-                Create
+              <FormField
+                control={form.control}
+                name="difficulty"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Difficulty</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a difficulty" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="beginner">
+                          <DifficultyLevel
+                            difficulty="beginner"
+                            divStyle="w-10"
+                          />
+                        </SelectItem>
+                        <SelectItem value="intermediate">
+                          <DifficultyLevel
+                            difficulty="intermediate"
+                            divStyle="w-10"
+                          />
+                        </SelectItem>
+                        <SelectItem value="expert">
+                          <DifficultyLevel
+                            difficulty="expert"
+                            divStyle="w-10"
+                          />
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                disabled={isLoading}
+                type="submit"
+                className="w-full md:w-auto"
+              >
+                <Hammer size={18} className="mr-1" /> Craft
               </Button>
             </form>
           </Form>

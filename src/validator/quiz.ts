@@ -9,6 +9,7 @@ export const createQuizValidator = z.object({
     .number()
     .min(1, { message: 'Number of questions can only be 1-20 questions' })
     .max(20, { message: 'Number of questions can only be 1-20 questions' }),
+  difficulty: z.enum(['beginner', 'intermediate', 'expert']),
 });
 
 export const answerValidator = z.object({

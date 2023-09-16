@@ -5,18 +5,11 @@ import { ZodError } from 'zod';
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    // const session = await getAuthSession();
-    // if (!session?.user) {
-    //   return NextResponse.json(
-    //     { error: 'You must be logged in to create a quiz' },
-    //     { status: 401 }
-    //   );
-    // }
     const body = await req.json();
-    const { amount, topic } = createQuizValidator.parse(body);
+    const { amount, topic, difficulty } = createQuizValidator.parse(body);
 
     let questions = await strict_output(
-      'Generate multiple-choice questions (MCQs) with concise answers (under 15 words each) at a moderate difficulty level.',
+      `Generate multiple-choice questions (MCQs) with concise answers (under 15 words each) at a ${difficulty} difficulty level, store all answers and questions and options in a JSON array`,
       new Array(amount).fill(
         `You are to generate a random multiple choice question about ${topic}`
       ),
