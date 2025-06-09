@@ -52,12 +52,7 @@ const TechnologiesSection = () => {
           content="Shadcn"
           className="dark:invert"
         />
-        <TechTooltip
-          src="./openai.svg"
-          alt="Open AI"
-          content="Open AI"
-          className="dark:invert"
-        />
+        <TechTooltip src="./gemini.svg" alt="Gemini" content="Google Gemini" />
         <TechTooltip src="./tailwind.svg" alt="Tailwind" content="Tailwind" />
         <TechTooltip
           src="./react-query.svg"

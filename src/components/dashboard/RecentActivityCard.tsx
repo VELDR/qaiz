@@ -26,9 +26,8 @@ const RecentActivityCard = async () => {
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
         <CardDescription>
-          You have played a total of{' '}
-          <span className="font-bold">{quizCount}</span>{' '}
-          {'quiz' + (quizCount !== 1 ? 'zes' : '')}.
+          You&apos;ve completed <span className="font-bold">{quizCount}</span>{' '}
+          {'quiz' + (quizCount !== 1 ? 'zes' : '')} so far.
         </CardDescription>
       </CardHeader>
       <CardContent className="overflow-y-scroll max-h-[550px]">

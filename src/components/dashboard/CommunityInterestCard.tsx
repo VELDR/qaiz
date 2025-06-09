@@ -23,6 +23,7 @@ const CommunityInterestCard = async () => {
       value: topic.count,
     };
   });
+
   return (
     <Card className="col-span-4">
       <CardHeader>
@@ -31,9 +32,8 @@ const CommunityInterestCard = async () => {
         </CardTitle>
 
         <CardDescription>
-          🔍 Explore the topics that light up our community! 🧐 Discover what
-          everyone&apos;s buzzing about and dive into the 🔥 hottest
-          discussions. Click on a topic to start a quiz on it.
+          See what others are quizzing on. Check out popular topics and click on
+          one that interests you.
         </CardDescription>
       </CardHeader>
       <CardContent className="border-4 rounded-md border-primary mx-8">

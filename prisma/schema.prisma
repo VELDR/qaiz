@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -27,7 +24,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@index([userId], name: "userId")
+  @@index([userId], map: "userId")
 }
 
 model Session {
@@ -37,7 +34,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId], name: "userId")
+  @@index([userId], map: "userId")
 }
 
 model User {
@@ -51,12 +48,6 @@ model User {
   Quiz          Quiz[]
 }
 
-enum Difficulty {
-  beginner
-  intermediate
-  expert
-}
-
 model Quiz {
   id          String     @id @default(cuid())
   userId      String
@@ -67,7 +58,7 @@ model Quiz {
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   questions   Question[]
 
-  @@index([userId], name: "userId")
+  @@index([userId], map: "userId")
 }
 
 model Question {
@@ -80,11 +71,17 @@ model Question {
   userAnswer String?
   quiz       Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
-  @@index([quizId], name: "quizId")
+  @@index([quizId], map: "quizId")
 }
 
 model TopicCount {
   id    String @id @default(cuid())
   topic String @unique
   count Int
+}
+
+enum Difficulty {
+  beginner
+  intermediate
+  expert
 }

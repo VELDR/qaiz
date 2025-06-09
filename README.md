@@ -1,6 +1,6 @@
 # Qaiz - Self-paced Learning Platform
 
-[Qaiz](http://qaiz.fildabert.com) is a self-paced learning platform built with Next.js, powered by OpenAI's AI-generated quizzes. It provides an engaging learning experience on any topics the user desires. With intuitive user interface design and robust features, Qaiz simplifies learning and knowledge assessment.
+[Qaiz](http://qaiz.fildabert.com) is a self-paced learning platform built with Next.js, powered by Gemini's AI-generated quizzes. It provides an engaging learning experience on any topics the user desires. With intuitive user interface design and robust features, Qaiz simplifies learning and knowledge assessment.
 
 ## Features
 
@@ -20,7 +20,7 @@
 
 - Prisma (with MySQL)
 
-- OpenAI API for AI-generated quizzes
+- Gemini API for AI-generated quizzes
 
 - Zod for robust data validation
 

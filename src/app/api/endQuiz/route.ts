@@ -7,37 +7,18 @@ export async function POST(req: Request, res: Response) {
     const body = await req.json();
     const { quizId } = endQuizValidator.parse(body);
 
-    const quiz = await prisma.quiz.findUnique({
-      where: {
-        id: quizId,
-      },
-    });
+    const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
     if (!quiz) {
-      return NextResponse.json(
-        {
-          message: 'Quiz not found',
-        },
-        {
-          status: 404,
-        }
-      );
+      return NextResponse.json({ message: 'Quiz not found' }, { status: 404 });
     }
     await prisma.quiz.update({
-      where: {
-        id: quizId,
-      },
-      data: {
-        timeEnded: new Date(),
-      },
+      where: { id: quizId },
+      data: { timeEnded: new Date() },
     });
-    return NextResponse.json({
-      message: 'Quiz ended',
-    });
+    return NextResponse.json({ message: 'Quiz ended' });
   } catch (error) {
     return NextResponse.json(
-      {
-        message: 'Something went wrong',
-      },
+      { message: 'Something went wrong' },
       { status: 500 }
     );
   }

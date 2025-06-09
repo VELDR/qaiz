@@ -13,7 +13,8 @@ const HistoryCard = () => {
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground">
-          Go back in time to review 📜 your quiz achievements and challenges!
+          Review your past quizzes to see what you&apos;ve learned and where you
+          can improve.
         </p>
       </CardContent>
       <Link

@@ -9,13 +9,12 @@ const CraftQuizCard = () => {
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
         <CardTitle className="text-2xl font-bold">Craft Your Quiz!</CardTitle>
-
         <Brain />
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground">
-          Dive into your interests! 🚀✨ Craft a topic-based multiple-choice
-          quiz! 📚🧠
+          Explore what you&apos;re curious about. Create a custom quiz on any
+          topic!
         </p>
       </CardContent>
       <Link

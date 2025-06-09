@@ -35,7 +35,7 @@ const QuizCompletionTimeCard = ({
   return (
     <Card className="md:col-span-1">
       <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-        <CardTitle className="text-2xl font-bold">Completion Time ⏱️</CardTitle>
+        <CardTitle className="text-2xl font-bold">Completion Time</CardTitle>
         <Hourglass />
       </CardHeader>
       <CardContent className="flex flex-col items-start">

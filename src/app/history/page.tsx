@@ -33,7 +33,7 @@ const HistoryPage = async () => {
             </Link>
           </div>
         </CardHeader>
-        <CardContent className="max-h-[60vh] overflow-scroll">
+        <CardContent className="max-h-[60vh] overflow-y-scroll">
           <QuizHistory limit={50} userId={session.user.id} />
         </CardContent>
       </Card>

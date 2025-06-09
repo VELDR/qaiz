@@ -62,7 +62,7 @@ const StatisticsPage = async ({ params: { quizId } }: Props) => {
           Dashboard
         </Link>
       </div>
-      <div className="grid gap-4 my-4 md:grid-cols-3">
+      <div className="grid gap-6 my-6 md:grid-cols-3">
         <ResultsCard
           score={Math.floor(score)}
           totalCorrect={totalCorrect}

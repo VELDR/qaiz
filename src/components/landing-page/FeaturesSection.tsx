@@ -3,7 +3,7 @@ import { Archive, BarChart, BrainCog, Flame, Timer } from 'lucide-react';
 
 const FeaturesSection = () => {
   return (
-    <section className="w-full dark:bg-slate-900 bg-slate-100 py-7 md:py-16">
+    <section className="w-full bg-primary-foreground py-7 md:py-16">
       <p className="text-4xl font-bold text-center mb-10 ">Features</p>
 
       <div className="flex flex-row flex-wrap justify-center mx-6 gap-8">
