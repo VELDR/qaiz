@@ -12,7 +12,7 @@ interface OutputFormat {
  * Generates structured JSON output from AI using strict formatting rules
  * Handles dynamic elements, lists, and multiple choice questions with validation
  */
-export async function strict_output(
+export async function generateStructuredResponse(
   system_prompt: string,
   user_prompt: string | string[],
   output_format: OutputFormat,
@@ -117,6 +117,7 @@ export async function strict_output(
       // Return appropriate format based on input
       return list_input ? output : output[0];
     } catch (error) {
+      console.log(error, '<<<<<<<< ERROR');
       error_msg = `\n\nPrevious attempt failed: ${error}`;
       if (verbose) {
         console.log(`Attempt ${i + 1} failed:`, error);
@@ -125,4 +126,69 @@ export async function strict_output(
   }
 
   return list_input ? [] : {};
+}
+
+/**
+ * Fallback validation when AI is unavailable
+ */
+function basicTopicValidation(topic: string): {
+  isValid: boolean;
+  reason?: string;
+} {
+  // Check for gibberish (too many consonants in a row, random patterns)
+  const gibberishPattern =
+    /[bcdfghjklmnpqrstvwxyz]{4,}|[0-9]{3,}|[^a-zA-Z0-9\s]{2,}/i;
+
+  if (gibberishPattern.test(topic)) {
+    return {
+      isValid: false,
+      reason: 'Topic appears to contain random characters or gibberish',
+    };
+  }
+
+  // Check for excessive length or word count
+  const words = topic.split(' ').filter((word) => word.length > 0);
+  if (words.length > 5) {
+    return {
+      isValid: false,
+      reason: 'Topic is too long. Please use 1-5 words maximum',
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Validates if a topic is appropriate and educational using AI
+ */
+export async function validateTopic(topic: string): Promise<{
+  isValid: boolean;
+  reason?: string;
+}> {
+  try {
+    const result = await generateStructuredResponse(
+      `You are a topic validator for educational quizzes. Determine if the given topic is:
+      1. Educational and appropriate for quiz questions
+      2. Not gibberish or random characters
+      3. Not offensive or inappropriate
+      4. A real subject that can have factual questions`,
+      `Validate this topic: "${topic}"`,
+      {
+        isValid: 'true or false',
+        reason: 'brief explanation if invalid (max 20 words)',
+      }
+    );
+
+    console.log(result, '<<<< AI');
+
+    return {
+      isValid: result.isValid === 'true',
+      reason: result.reason || undefined,
+    };
+  } catch (error) {
+    console.error('Topic validation error:', error);
+    // Fallback to basic validation if AI fails
+    const basicValidation = basicTopicValidation(topic);
+    return basicValidation;
+  }
 }

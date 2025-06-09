@@ -17,7 +17,7 @@ export const POST = async (req: Request, res: Response) => {
     const body = await req.json();
     const { topic, amount, difficulty } = createQuizValidator.parse(body);
 
-    const { data } = await axios.post(`${process.env.API_URL}/api/questions `, {
+    const { data } = await axios.post(`${process.env.API_URL}/api/questions`, {
       topic,
       amount,
       difficulty,
@@ -41,7 +41,7 @@ export const POST = async (req: Request, res: Response) => {
       },
     });
 
-    //creates or update topicCount
+    // Creates or updates the topicCount
     await prisma.topicCount.upsert({
       where: { topic },
       create: {
@@ -58,14 +58,12 @@ export const POST = async (req: Request, res: Response) => {
     type mcqQuestion = {
       question: string;
       answer: string;
+      explanation: string;
       option1: string;
       option2: string;
       option3: string;
     };
-    /**
-     * Data format:
-     * questions: [{question, answer, option1, option2, option3}]
-     */
+
     let questions = data.questions.map((question: mcqQuestion) => {
       let options = [
         question.answer,
@@ -78,19 +76,25 @@ export const POST = async (req: Request, res: Response) => {
         quizId: quiz.id,
         question: question.question,
         answer: question.answer,
+        explanation: question.explanation,
         options: JSON.stringify(options),
       };
     });
+
     await prisma.question.createMany({
       data: questions,
     });
+
     return NextResponse.json({ quizId: quiz.id }, { status: 200 });
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     } else {
       console.error('api/quiz error: ', error);
-      return NextResponse.json({ error: error }, { status: 500 });
+      return NextResponse.json(
+        { error: 'Something went wrong' },
+        { status: 500 }
+      );
     }
   }
 };

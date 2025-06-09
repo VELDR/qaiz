@@ -30,7 +30,7 @@ const RecentActivityCard = async () => {
           {'quiz' + (quizCount !== 1 ? 'zes' : '')} so far.
         </CardDescription>
       </CardHeader>
-      <CardContent className="overflow-y-scroll max-h-[550px]">
+      <CardContent className="max-h-[550px] overflow-x-hidden overflow-y-auto">
         <QuizHistory limit={10} userId={session.user.id} />
       </CardContent>
     </Card>

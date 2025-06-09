@@ -21,3 +21,12 @@ export function formatTime(seconds: number) {
   }
   return result.join(' ');
 }
+
+export function capitalizeString(string: string): string {
+  return string
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+    .trim();
+}

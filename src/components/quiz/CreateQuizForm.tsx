@@ -49,11 +49,14 @@ const CreateQuizForm = ({ topicParam }: Props) => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const {
-    mutate: getQuestions,
-    isLoading,
-    isError,
-  } = useMutation({
+  const { mutateAsync: validateTopic, isLoading: isValidating } = useMutation({
+    mutationFn: async (topic: string) => {
+      const response = await axios.post('/api/validate-topic', { topic });
+      return response.data;
+    },
+  });
+
+  const { mutateAsync: getQuestions } = useMutation({
     mutationFn: async ({ amount, topic, difficulty }: Input) => {
       const response = await axios.post('/api/quiz', {
         amount,
@@ -73,34 +76,39 @@ const CreateQuizForm = ({ topicParam }: Props) => {
     },
   });
 
-  const onSubmit = (input: Input) => {
-    setIsGeneratingQuiz(true);
-    getQuestions(
-      {
-        amount: input.amount,
-        topic: input.topic,
-        difficulty: input.difficulty,
-      },
-      {
-        onSuccess: ({ quizId }) => {
-          setTimeout(() => {
-            setFinishedLoading(true);
-            router.push(`/quiz/${quizId}`);
-          }, 1000);
-        },
-        onError: () => {
-          setIsGeneratingQuiz(false);
-          if (isError) {
-            toast({
-              title: 'Failed Creating Quiz 😔',
-              variant: 'destructive',
-              description:
-                "Don't be alarmed, our AI is just having a chat with Siri. They're discussing world domination strategies. Try again later",
-            });
-          }
-        },
+  const onSubmit = async (input: Input) => {
+    try {
+      const validationResult = await validateTopic(input.topic);
+
+      setIsGeneratingQuiz(true);
+
+      const quizResult = await getQuestions({
+        ...input,
+        topic: validationResult.normalizedTopic,
+      });
+
+      setTimeout(() => {
+        setFinishedLoading(true);
+        router.push(`/quiz/${quizResult.quizId}`);
+      }, 1000);
+    } catch (error: any) {
+      setIsGeneratingQuiz(false);
+
+      if (error.response?.status === 400 && error.response?.data?.reason) {
+        toast({
+          title: 'Invalid Topic',
+          variant: 'destructive',
+          description: error.response.data.reason,
+        });
+      } else {
+        toast({
+          title: 'Quiz Generation Failed',
+          variant: 'destructive',
+          description:
+            'Unable to generate quiz questions. Please try again with a different topic or check your internet connection.',
+        });
       }
-    );
+    }
   };
 
   form.watch();
@@ -207,11 +215,12 @@ const CreateQuizForm = ({ topicParam }: Props) => {
                 )}
               />
               <Button
-                disabled={isLoading}
+                disabled={isValidating}
                 type="submit"
                 className="w-full md:w-auto"
               >
-                <Hammer size={18} className="mr-1" /> Craft
+                <Hammer size={18} className="mr-1" />
+                {isValidating ? 'Validating...' : 'Craft'}
               </Button>
             </form>
           </Form>

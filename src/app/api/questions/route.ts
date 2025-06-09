@@ -1,4 +1,4 @@
-import { strict_output } from '@/lib/gemini';
+import { generateStructuredResponse } from '@/lib/gemini';
 import { createQuizValidator } from '@/validator/quiz';
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
@@ -8,7 +8,7 @@ export const POST = async (req: Request, res: Response) => {
     const body = await req.json();
     const { amount, topic, difficulty } = createQuizValidator.parse(body);
 
-    let questions = await strict_output(
+    let questions = await generateStructuredResponse(
       `Generate multiple-choice questions (MCQs) with concise answers (under 15 words each) at a ${difficulty} difficulty level, store all answers and questions and options in a JSON array`,
       new Array(amount).fill(
         `You are to generate a random multiple choice question about ${topic}`
@@ -16,6 +16,8 @@ export const POST = async (req: Request, res: Response) => {
       {
         question: 'question',
         answer: 'answer with max length of 15 words',
+        explanation:
+          'brief explanation why this answer is correct (max 50 words)',
         option1: '1st option with max length of 15 words',
         option2: '2nd option with max length of 15 words',
         option3: '3rd option with max length of 15 words',

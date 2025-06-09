@@ -1,7 +1,13 @@
 'use client';
 
 import { Difficulty, Question } from '@prisma/client';
-import { AlertCircle, CheckCircle, FileCheck, XCircle } from 'lucide-react';
+import {
+  AlertCircle,
+  CheckCircle,
+  FileCheck,
+  Info,
+  XCircle,
+} from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import DifficultyLevel from '../DifficultyLevel';
 import { Badge } from '@/components/ui/badge';
@@ -79,6 +85,7 @@ const QuizReview = ({ questions, topic, difficulty }: Props) => {
             userAnswer,
             isCorrect,
             options,
+            explanation,
           } = question;
           const parsedOptions = JSON.parse(options as string) as string[];
           const letters = ['A', 'B', 'C', 'D'];
@@ -127,7 +134,7 @@ const QuizReview = ({ questions, topic, difficulty }: Props) => {
                 </div>
               </CardHeader>
 
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 space-y-4">
                 {!wasAnswered ? (
                   /* Unanswered Question Layout */
                   <div className="space-y-4">
@@ -213,16 +220,22 @@ const QuizReview = ({ questions, topic, difficulty }: Props) => {
                             >
                               {option}
                             </p>
-                            {isCorrectAnswer && (
-                              <CheckCircle className="w-5 h-5 text-green-500" />
-                            )}
-                            {isUserAnswer && !isCorrectAnswer && (
-                              <XCircle className="w-5 h-5 text-red-500" />
-                            )}
                           </div>
                         </div>
                       );
                     })}
+                  </div>
+                )}
+
+                {/* Explanation Section */}
+                {explanation && (
+                  <div className="mt-4 p-4 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 border border-accent">
+                    <div className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-accent leading-relaxed">
+                        {explanation}
+                      </p>
+                    </div>
                   </div>
                 )}
               </CardContent>

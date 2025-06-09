@@ -7,11 +7,11 @@ type Props = { finishedLoading: boolean };
 
 const loadingTexts = [
   '⚙️ Generating questions',
-  '🌟 Magic at work, conjuring quiz wonders',
-  '🔍 Scouring the web for trivia',
-  '🌌 Venturing into the Quizverse',
-  '🌐 Connecting you to the Quizverse',
-  '💭 Inspiring thoughtful questions',
+  '📝 Creating your quiz',
+  '🔍 Finding good questions',
+  '⏳ Almost ready',
+  '🎯 Putting together your quiz',
+  '📚 Preparing questions',
 ];
 
 const LoadingQuiz = ({ finishedLoading }: Props) => {

@@ -62,14 +62,15 @@ model Quiz {
 }
 
 model Question {
-  id         String   @id @default(cuid())
-  question   String
-  answer     String
-  quizId     String
-  options    Json
-  isCorrect  Boolean?
-  userAnswer String?
-  quiz       Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  question    String
+  answer      String
+  explanation String?
+  quizId      String
+  options     Json
+  isCorrect   Boolean?
+  userAnswer  String?
+  quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
   @@index([quizId], map: "quizId")
 }

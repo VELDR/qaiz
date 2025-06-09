@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradAI" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9333ea" />
+      <stop offset="100%" stop-color="#db2777" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#FFFFFF" stroke="black" stroke-width="2" />
+  <text x="32" y="38" dominant-baseline="middle" text-anchor="middle"
+    font-family="Arial, sans-serif" font-weight="bold" font-size="24" letter-spacing="-1"> Q<tspan
+      fill="url(#gradAI)">AI</tspan>Z </text>
+</svg>
