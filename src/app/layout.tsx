@@ -6,6 +6,7 @@ import Navbar from '@/components/navbar/Navbar';
 import Providers from '@/components/Providers';
 import NextNProgressClient from '@/components/NextNProgressClient';
 import { Toaster } from '@/components/ui/toaster';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Navbar />
           <NextNProgressClient />
           {children}
+          <SpeedInsights />
           <Toaster />
         </Providers>
       </body>

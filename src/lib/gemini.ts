@@ -117,7 +117,6 @@ export async function generateStructuredResponse(
       // Return appropriate format based on input
       return list_input ? output : output[0];
     } catch (error) {
-      console.log(error, '<<<<<<<< ERROR');
       error_msg = `\n\nPrevious attempt failed: ${error}`;
       if (verbose) {
         console.log(`Attempt ${i + 1} failed:`, error);
@@ -178,8 +177,6 @@ export async function validateTopic(topic: string): Promise<{
         reason: 'brief explanation if invalid (max 20 words)',
       }
     );
-
-    console.log(result, '<<<< AI');
 
     return {
       isValid: result.isValid === 'true',
