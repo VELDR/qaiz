@@ -7,6 +7,7 @@ import Providers from '@/components/Providers';
 import NextNProgressClient from '@/components/NextNProgressClient';
 import { Toaster } from '@/components/ui/toaster';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           <NextNProgressClient />
           {children}
           <SpeedInsights />
+          <Analytics />
           <Toaster />
         </Providers>
       </body>
